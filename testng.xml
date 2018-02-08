@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Testng suite1 - regressions test" parallel="tests">
+    <test name="Testng test1" parallel="methods" thread-count="2">
+        <parameter name="userName" value="priyanka"/>
+        <parameter name="password" value="jalal"/>
+        <parameter name="a" value="5"/>
+        <parameter name="b" value="6"/>
+         <classes>
+            <class name="com.chartlab.testng.tests.FacebookTest"/>
+            <class name="com.chartlab.testng.tests.GoogleSearch"/>
+        </classes>
+    </test>
+    <test name="other test">
+        <classes>
+            <class name="com.chartlab.testng.tests.AmazonTest"/>
+        </classes>
+    </test>
+
+
+</suite>
