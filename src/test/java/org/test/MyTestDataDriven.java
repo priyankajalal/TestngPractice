@@ -9,33 +9,45 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.Properties;
-import java.io.InputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.Enumeration;
+import java.util.Properties;
 
-public class MyTest {
+public class MyTestDataDriven {
 
-    @Test
-    public void test1() throws Exception {
-        Properties p= getObjectRepository();
+
+    @Test(dataProvider = "testdata")
+    public void test1(String url,String userName,String pwd) throws Exception {
         WebDriver driver = new ChromeDriver();
-        driver.get(p.getProperty("url"));
+        driver.get(url);
         driver.manage().window().maximize();
         WebElement user = (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.elementToBeClickable(By.id("email")));
         WebElement pass = driver.findElement(By.id("pass"));
-        user.sendKeys(p.getProperty("userName"));
-        pass.sendKeys(p.getProperty("password"));
+        user.sendKeys(userName);
+        pass.sendKeys(pwd);
     }
 
-    public Properties getObjectRepository() throws Exception {
+    @DataProvider(name="testdata")
+    public Object[][] getObjectRepository() throws Exception {
         Properties p = new Properties();
-        String path=System.getProperty("user.dir")+"\\src\\test\\resources\\facebookData.properties";
+        String path=System.getProperty("user.dir")+"\\src\\test\\resources\\test.properties";
         File file = new File(path);
         InputStream stream = new FileInputStream(file);
         p.load(stream);
-        return p;
+        Object[][] facebookData = new Object[1][3];
+        Enumeration<String> enums = (Enumeration<String>) p.propertyNames();
+        int i=0;
+        while (enums.hasMoreElements()) {
+            String key = enums.nextElement();
+            String[] values = p.getProperty(key).split(",");
+            facebookData[i][0]=values[0];
+            facebookData[i][1]=values[1];
+            facebookData[i][2]=values[2];
+            i++;
+        }
+        return facebookData;
     }
 }

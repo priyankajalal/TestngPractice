@@ -15,10 +15,10 @@ import java.util.Properties;
 import java.io.InputStream;
 import java.io.File;
 
-public class ReadPropertyFile {
+public class MyTest {
 
     @Test
-    public void FileTest(String userName,String password,String url) throws Exception {
+    public void test1() throws Exception {
         Properties p= getObjectRepository();
         WebDriver driver = new ChromeDriver();
         driver.get(p.getProperty("url"));
@@ -32,7 +32,7 @@ public class ReadPropertyFile {
 
     public Properties getObjectRepository() throws Exception {
         Properties p = new Properties();
-        String path=System.getProperty("user.dir")+"src/test/resources/facebookData.properties";
+        String path=System.getProperty("user.dir")+"\\src\\test\\resources\\facebookData.properties";
         File file = new File(path);
         InputStream stream = new FileInputStream(file);
         p.load(stream);

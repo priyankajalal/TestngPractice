@@ -1,13 +1,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Testng suite1 - regressions test" parallel="tests">
-    <test name="Testng test1" parallel="methods" thread-count="2">
+<suite name="Testng suite1 - regressions test" parallel="tests" thread-count="3">
+    <test name="Testng test1" parallel="methods" >
         <parameter name="userName" value="priyanka"/>
         <parameter name="password" value="jalal"/>
         <parameter name="a" value="5"/>
         <parameter name="b" value="6"/>
-         <classes>
+         <classes >
             <class name="com.chartlab.testng.tests.FacebookTest"/>
             <class name="com.chartlab.testng.tests.GoogleSearch"/>
+            <class name="com.chartlab.testng.tests.DataDrivenTest"/>
         </classes>
     </test>
     <test name="other test">

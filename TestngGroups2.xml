@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name=" Grouping2" >
+    <test name="testing grouping2">
+        <groups>
+            <define name="All">
+                <include name="Car"/>
+                <include name="Scooter"/>
+            </define>
+            <run>
+                <include name="All"/>
+            </run>
+        </groups>
+        <classes>
+            <class name = "com.chartlab.testng.tests.TestngGrouping"/>
+        </classes>
+    </test>
+</suite>
